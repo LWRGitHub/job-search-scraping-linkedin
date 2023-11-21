@@ -5,6 +5,7 @@ from lxml import etree
 import time
 from Env import Env
 
+# selenium
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -12,9 +13,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
-
-
-
 
 
 class Scrp:
@@ -65,21 +63,11 @@ class Scrp:
             for li in li_elements:
                 driver.execute_script("arguments[0].scrollIntoView(true);", li)
 
-                # Add a delay if needed to allow for any dynamic content to load
-                # time.sleep(1)
-
-        
-
-            
-                
+            # wait for page to load 
             time.sleep(4)
 
-            # jobs = driver.find_elements_by_xpath("//*[@class='job-card-container__metadata-item']")
-
-            # jobs = driver.find_elements_by_xpath("//*[@data-view-name='job-card']") 
-            # //li[@class='job-card-container__metadata-item']
+            # grab data
             max_pays = driver.find_elements_by_xpath("//li[@class='job-card-container__metadata-item']") 
-            # hrefs = driver.find_elements_by_xpath("//a[@class='disabled ember-view job-card-container__link job-card-list__title']")
             companys = driver.find_elements_by_xpath("//span[@class='job-card-container__primary-description ']")
             job_titles = driver.find_elements_by_xpath("//a[@class='disabled ember-view job-card-container__link job-card-list__title']")
                 
@@ -88,23 +76,18 @@ class Scrp:
             job_title_list = []
             hrefs = []
 
+            # add elements to lists
             def add_to_list(list, elements, hasHref = False):
                 for element in elements:
                     list.append(element.text)
                     if(hasHref):
                         hrefs.append(element.get_attribute("href"))
-
             add_to_list(max_pay_list, max_pays)
             add_to_list(company_list, companys)
             add_to_list(job_title_list, job_titles, True)
 
-            
-
+            # get max pay & add to res only if it's greater than the minimum acceptable pay
             for i in range(len(max_pay_list)):
-                # print('\n')
-                # print(job.text)
-                # print('\n')
-                # print(job.find_element_by_xpath("//*[@class='job-card-container__metadata-item']").text)
                 txt = max_pay_list[i]
             
                 d_sign_idx_1 = txt.index("$")        
@@ -122,8 +105,7 @@ class Scrp:
                 if(txt > int(self.env.MINIMUM_ACCEPTABLE_PAY) ):
                     res[F"{txt},{company_list[i]},{job_title_list[i]}"] = {"max_pay":txt, "company":company_list[i], "job_title":job_title_list[i], "href":hrefs[i]}
 
-            
-
+            # try to click on the next page
             try:
                 ul_element = WebDriverWait(driver, 10).until(
                     EC.presence_of_element_located((By.XPATH, "//ul[@class='artdeco-pagination__pages artdeco-pagination__pages--number']"))
@@ -140,22 +122,10 @@ class Scrp:
             except:
                 do = False
                     
+        # add to file in JSON format
         f = open("jobs.txt", "a")
         f.write(str(res))
         f.close()
                 
         print("\ndone\n")
         driver.quit()
-
-        """ TODO:
-            
-            filter through res >>> grab max pay e.g. "250" 
-
-            const idxOf1st$ = text.indexOf("$");           // 0
-            const idxOf2nd$ = text.indexOf("$", idxOf1st$ + 1); //11
-
-            text = text.slice(idxOf2nd$+1);
-            const idxOfK = text.indexOf("K"); 
-
-            text = text.substr(0, idxOfK); 
-        """
