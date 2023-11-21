@@ -36,9 +36,10 @@ All job listings will be saved in the "jobs.txt" file in JSON format.
 
 ## Run
 
-1. `python3 app.py`
-2. You might encounter a CAPTCHA prompt, in which case, kindly complete it. The code includes a 20-second timer to provide you with ample time to fulfill this requirement.
-3. All outcomes will be appended to the "jobs.txt" file in JSON format.
+1. You will have to manually make the "jobs.txt" as it is ignored by git.
+2. `python3 app.py`
+3. You might encounter a CAPTCHA prompt, in which case, kindly complete it. The code includes a 20-second timer to provide you with ample time to fulfill this requirement.
+4. All outcomes will be appended to the "jobs.txt" file in JSON format.
 
 
 ## NOTES
@@ -52,4 +53,4 @@ All job listings will be saved in the "jobs.txt" file in JSON format.
 
 ***Site + Res***
 
-![Image of the terminal just before entering the command to run the scraper](https://raw.githubusercontent.com/LWRGitHub/________/main/job-search-scraping-img.png)
+![Image of the terminal just before entering the command to run the scraper](https://raw.githubusercontent.com/LWRGitHub/job-search-scraping-linkedin/main/job-search-scraping-img.png)
