@@ -1,5 +1,5 @@
 # Job Search via LinkedIn with Web Scraping!
-Effortlessly harness the capabilities of this BeautifulSoup/Selenium web scraping application to efficiently sift through a large volume of LinkedIn job listings, tailored to your specific job criteria.
+Effortlessly harness the capabilities of this Selenium web scraping application to efficiently sift through a large volume of LinkedIn job listings, tailored to your specific job criteria.
 
 ***Benefits***
 
@@ -11,10 +11,14 @@ All job listings will be saved in the "jobs.txt" file in JSON format.
 
 ## Tech Used
 - Python
-- BeautifulSoup 4
+    - dotenv
 - Selenium
+- webdriver-manager
+    - chromedriver
+<!-- - lxml
 - requests
-- dotenv
+- BeautifulSoup -->
+
 
 
 ## Setup, Install & 

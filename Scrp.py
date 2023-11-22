@@ -1,18 +1,15 @@
-from bs4 import BeautifulSoup as bs
-import requests
-from webdriver_manager.chrome import ChromeDriverManager
-from lxml import etree 
-import time
-from Env import Env
-
 # selenium
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
+
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+from Env import Env
+
+
 
 
 class Scrp:
