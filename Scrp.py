@@ -6,10 +6,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 from Env import Env
-from Read_Write import Read_Write
 import json
-import datetime
-import re
+# import datetime
+# import re
 
 
 
@@ -158,14 +157,14 @@ class Scrp:
 
         
  
-        # get current time & clean it up
-        current_time = re.sub('\s+', '_', str(datetime.datetime.now()))
-        current_time = re.sub('[\.]+', '', current_time)
+        # # get current time & clean it up
+        # current_time = re.sub('\s+', '_', str(datetime.datetime.now()))
+        # current_time = re.sub('[\.]+', '', current_time)
 
-        with open(f"error_{error_count}_{current_time}.json", 'w', encoding='utf-8') as f:
+        with open(f"error_scrp_pg.json", 'w', encoding='utf-8') as f:
             json.dump(list_len_error_data, f, ensure_ascii=False, indent=4)
 
-        with open(f"jobs_befor_exp_yrs_sort_{current_time}.json", 'w', encoding='utf-8') as f:
+        with open(f"jobs_befor_exp_yrs_sort.json", 'w', encoding='utf-8') as f:
             json.dump(res, f, ensure_ascii=False, indent=4)
         
         # Read_Write(res).read_write()

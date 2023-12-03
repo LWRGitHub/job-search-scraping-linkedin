@@ -13,6 +13,11 @@ class Get_Req_Yrs:
         # setup var for writing
         data = {}
 
+        # old_data = {}
+        # with open('data.json') as f:
+        #     old_data = json.load(f)
+
+        
         # read data from json file
         with open('jobs_wth_desc.json') as f:
             data = json.load(f)

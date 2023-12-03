@@ -17,14 +17,14 @@ class Get_Page:
     def get_page(self):
     
         # read old data from json file
-        old_data = {}
-        with open('data.json') as f:
-            old_data = json.load(f)
+        # old_data = {}
+        # with open('data.json') as f:
+        #     old_data = json.load(f)
 
         
         # read data from json file
         new_data = {}
-        with open('jobs_befor_exp_yrs_sort_2023-12-02_00:07:44482473.json') as f:
+        with open('jobs_befor_exp_yrs_sort.json') as f:
             new_data = json.load(f)    
         
 
