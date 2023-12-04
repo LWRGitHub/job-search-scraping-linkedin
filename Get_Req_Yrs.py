@@ -17,7 +17,7 @@ class Get_Req_Yrs:
         # with open('data.json') as f:
         #     old_data = json.load(f)
 
-        
+
         # read data from json file
         with open('jobs_wth_desc.json') as f:
             data = json.load(f)
@@ -41,34 +41,39 @@ class Get_Req_Yrs:
                 job_description = data[key]["job_desc"]
                 # print(job_description)
 
-                client = OpenAI(
-                    # defaults to os.environ.get("OPENAI_API_KEY")
-                    api_key=self.env.CHATGPT_API_KEY,
-                )
-
-                required_years = client.chat.completions.create(
-                    messages=[
-                        {
-                            "role": "user",
-                            "content": f"how many years of experience are required (NOT preferred but required, please make sure you only send the required years; the preferred years is not the required years) for the following job, just give a single number, only respond with the number:\n {job_description}",
-                        }
-                    ],
-                    model="gpt-3.5-turbo",
-                )
-                
                 try:
-                    data[key]["required_years_of_experience"] = int(required_years.choices[0].message.content)
+                    client = OpenAI(
+                        # defaults to os.environ.get("OPENAI_API_KEY")
+                        api_key=self.env.CHATGPT_API_KEY,
+                    )
 
-                    if(data[key]["required_years_of_experience"] < int(self.env.TOTAL_YEARS_OF_EXPERIENCE)+1):
-                        final_data[key] = data[key]
-                        new_find[key] = data[key]
+                    required_years = client.chat.completions.create(
+                        messages=[
+                            {
+                                "role": "user",
+                                "content": f"how many years of experience are required (NOT preferred but required, please make sure you only send the required years; the preferred years is not the required years) for the following job, just give a single number, only respond with the number:\n {job_description}",
+                            }
+                        ],
+                        model="gpt-3.5-turbo",
+                        )
+                        
+                    try:
+                        data[key]["required_years_of_experience"] = int(required_years.choices[0].message.content)
 
-                    print('\n\n\n\n',data[key]["required_years_of_experience"], '\n\n\n\n')
-                 
+                        if(data[key]["required_years_of_experience"] < int(self.env.TOTAL_YEARS_OF_EXPERIENCE)+1):
+                            final_data[key] = data[key]
+                            new_find[key] = data[key]
+
+                        print(data[key]["required_years_of_experience"])
+                    
+                    except Exception as e: 
+                        data[key]["required_years_of_experience"] = f"__ERROR__: {str(e)}"
+                        error_dict[key] = data[key]
+                        print(f"__ERROR__: {str(e)}")
                 except Exception as e: 
-                    data[key]["required_years_of_experience"] = f"__ERROR__: {str(e)}"
+                    data[key]["__ERROR__OpenAI"] = f"__ERROR__: {str(e)}"
                     error_dict[key] = data[key]
-                    print('\n\n\n\n',f"__ERROR__: {str(e)}", '\n\n\n\n')
+                    print(f"__ERROR__OpenAI: {str(e)}")
                 
                 
 

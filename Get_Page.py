@@ -51,6 +51,7 @@ class Get_Page:
         # all data
         all_data = {}
         error = {}
+        message_hiring_team = {}
 
         # Find required years of experience
         for key in new_data:
@@ -70,6 +71,9 @@ class Get_Page:
                 # time.sleep(2)
 
                 try:
+
+                    
+
                     # expand job description
                     see_more_less = WebDriverWait(driver, 10).until(
                         EC.presence_of_element_located((By.XPATH, "//*[contains(@class, 'jobs-description__footer-button')]"))
@@ -87,6 +91,17 @@ class Get_Page:
                     job_description = driver.find_element_by_xpath("//div[@id='job-details']").text
 
                     new_data[key]["job_desc"] = job_description
+
+
+                    try:
+                    # See if it has a someone form the hirring team to message
+                        ome_one_hiring = driver.find_element_by_xpath("//*[contains(@class, 'hirer-card__container')]")
+                        #[some_one_hiring]
+                        new_data[key]["message_hiring_team"] = [True, new_data[key]["href"]]
+                        message_hiring_team[key] = new_data[key]
+                    except:
+                        pass
+
                 except:
                     error[key] = new_data[key]
                     continue
@@ -96,6 +111,9 @@ class Get_Page:
 
         with open('error_jobs_wth_desc.json', 'w', encoding='utf-8') as file:
             json.dump(error, file, ensure_ascii=False, indent=4)
+
+        with open('message_hiring_team.json', 'w', encoding='utf-8') as file:
+            json.dump(message_hiring_team, file, ensure_ascii=False, indent=4)
                 
 
         # all data
