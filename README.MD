@@ -3,13 +3,16 @@ Effortlessly harness the capabilities of this Selenium web scraping application 
 
 ***Benefits***
 
-Even with LinkedIn's robust filters, job searching can be a time-consuming process, spanning hours or even days to uncover a substantial number of opportunities. However, with this application, you can achieve the same results in a matter of minutes.
+- Even with LinkedIn's robust filters, job searching can be a time-consuming process, spanning hours or even days to uncover a substantial number of opportunities. However, with this application, you can achieve the same results in a matter of minutes.
 
-This web scraping tool eliminates the need for redundancy in your job search results. Moreover, it is worth noting that LinkedIn's salary filter is capped at $200,000. Therefore, if you are seeking positions with higher compensation, you can leverage this scraper to ensure that you exclusively receive job listings that meet your minimum acceptable salary criteria.
+- This web scraping tool eliminates the need for redundancy in your job search results. Moreover, it is worth noting that LinkedIn's salary filter is capped at $200,000. Therefore, if you are seeking positions with higher compensation, you can leverage this scraper to ensure that you exclusively receive job listings that meet your minimum acceptable salary criteria.
 
-Leveraging the ChatGPT OpenAI API and employing artificial intelligence/machine learning capabilities, specifically the GPT-3 language model, to ascertain the duration of required experience specified in the job description.
+- Leveraging the ChatGPT OpenAI API and employing artificial intelligence/machine learning capabilities, specifically the GPT-3 language model, to ascertain the duration of required experience specified in the job description.
+
+- This application has been enhanced with a novel feature feature designed to streamline job filtering, allowing users to identify job postings that offer the ability to communicate with the hiring team. ***Please be advised that the utilization of this feature (message hiring team) necessitates a premium LinkedIn Subscription to career or business.***
 
 All job listings will be saved to  "*.json" files 
+
 
 ## Tech Used
 - Python
